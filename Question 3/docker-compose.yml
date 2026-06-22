@@ -1,0 +1,11 @@
+services:
+  mssql:
+    image: nectari.repository.io/datasources/mssql:2019-latest
+    container_name: mssql
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "${SA_PASSWORD}"   # injecte a l'execution, jamais cuit dans l'image
+    ports:
+      - "1433:1433"
+    restart: unless-stopped
+    # Pas besoin de definir un healthcheck ici: l'image en contient deja un (instruction HEALTHCHECK).

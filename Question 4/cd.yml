@@ -1,0 +1,35 @@
+---
+name: Create and Publish
+
+on:
+  workflow_dispatch:  # se declenche manuellement, via un bouton dans l'onglet Actions
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    # Donne au jeton temporaire le droit de pousser un package dans GHCR
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  # recupere le code dans le runner
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }} # le nom d'utilisateur GitHub, fourni auto
+          password: ${{ secrets.GITHUB_TOKEN }} # jeton temporaire cree par GitHub a chaque run
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: "./Question 3" # le dossier ou est le Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository }}/mssql:2019-latest
+          # nourrit le secret BuildKit du Dockerfile
+          secrets: |
+            sa_password=${{ secrets.SA_PASSWORD }}
