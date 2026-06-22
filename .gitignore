@@ -1,0 +1,11 @@
+# Artefacts de build .NET (Q1)
+bin/
+obj/
+
+# Config Obsidian
+.obsidian/
+
+# Secrets
+sa_password.txt
+.env
+*.env
