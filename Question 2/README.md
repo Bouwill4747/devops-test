@@ -13,11 +13,3 @@ You need a quick report from a public API.
 
 **Deliverables**
 - Updated `Question_2.ps1`.
-
-**Output example** (copy/paste from your terminal).
-- Table: $120.00
-- Paddle: $12.00
-- Paddle: $12.00
-- Pack of Balls: $2.40
-- Pack of Balls: $2.40
-- Pack of Balls: $2.40
